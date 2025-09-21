@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malek</title>
+<link rel="icon" href="https://i.postimg.cc/yxt6XXCv/Picsart-25-09-21-01-43-00-300.jpg" type="image/png">
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    overflow: auto;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  iframe {
+    max-width: 80%;
+    height: 315px;
+    border: none;
+  }
+  /* زر تسجيل الدخول ثابت أعلى يمين */
+  #loginBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  /* تصميم نافذة تسجيل الدخول */
+  #loginForm {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1001;
+    text-align: center;
+  }
+  #loginForm input {
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
+    width: 80%;
+  }
+  #loginForm button {
+    padding: 8px 20px;
+    cursor: pointer;
+  }
+  /* أزرار التواصل الاجتماعي */
+  .social-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .social-buttons a {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+  }
+  .youtube { background-color: #FF0000; }
+  .instagram { background-color: #C13584; }
+  .facebook { background-color: #1877F2; }
+  .discord { background-color: #5865F2; }
+</style>
+</head>
+<body>
+<!-- زر تسجيل الدخول -->
+<button id="loginBtn">تسجيل دخول</button>
+
+<!-- نموذج تسجيل الدخول -->
+<div id="loginForm">
+  <h2>تسجيل الدخول</h2>
+  <input type="email" id="email" placeholder="ايميلك">
+  <input type="password" id="password" placeholder="كلمة السر">
+  <button id="submitLogin">دخول</button>
+</div>
+
+<!-- شعار الموقع -->
+<img src="https://i.postimg.cc/yxt6XXCv/Picsart-25-09-21-01-43-00-300.jpg" alt="Malek Logo">
+
+<!-- أزرار التواصل الاجتماعي -->
+<div class="social-buttons">
+  <a href="https://youtube.com/@malek_hussein_official" target="_blank" class="youtube">يوتيوب</a>
+  <a href="https://www.instagram.com/malek.hussein.offical?igsh=MWl4aTN3NDdlMzR6dA==" target="_blank" class="instagram">إنستجرام</a>
+  <a href="https://www.facebook.com/share/1BNnWHeaCh/" target="_blank" class="facebook">فيسبوك</a>
+  <a href="https://discord.gg/pctbBwgE" target="_blank" class="discord">Discord</a>
+</div>
+
+<h1>ويب سايت مالك</h1>
+<h1 style="font-size: 24px;">مالك حسين – كورة، ماينكرافت، روبلوكس و سوبر بير اندينجر و فري فاير  و بيجي ⚽🔥🏆🎮 الطريق الي المليون 1M</h1>
+<p>عدد المشتركين: <span id="subscriberCount">تحميل...</span></p>
+
+<script>
+const channelId = 'UCm4iNm-_GQxY9XY5F6W5eVg';
+const apiKey = 'AIzaSyDN-if78Bvwom3plu6gMQjykc_8sIb-O7w';
+
+fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`)
+  .then(response => response.json())
+  .then(data => {
+    const subscriberCount = data.items[0].statistics.subscriberCount;
+    document.getElementById('subscriberCount').innerText = subscriberCount;
+  })
+  .catch(error => {
+    console.error('Error fetching subscriber count:', error);
+    document.getElementById('subscriberCount').innerText = "فشل في التحميل";
+  });
+</script>
+
+<h1>فيديو الأسبوع الرابع</h1>
+<iframe src="https://www.youtube.com/embed/EoKToxoPjsM" allowfullscreen></iframe>
+<h1>ارجوك وصلنا إلى المليون</h1>
+
+<script>
+const loginBtn = document.getElementById('loginBtn');
+const loginForm = document.getElementById('loginForm');
+const submitLogin = document.getElementById('submitLogin');
+
+loginBtn.addEventListener('click', () => {
+  loginForm.style.display = 'block';
+});
+
+submitLogin.addEventListener('click', () => {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  if(email && password){
+    alert("تم تسجيل الدخول!");
+    loginForm.style.display = 'none';
+    loginBtn.style.display = 'none';
+  } else {
+    alert("من فضلك املأ الايميل وكلمة السر");
+  }
+});
+</script>
+</body>
+</html>
